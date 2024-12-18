@@ -5,6 +5,7 @@ from models.drinks import Cocktail, Shot, Gluwein
 from models.ingredients import SolidIngredient
 from config.settings import PARTY_SETTINGS
 
+
 class PartySimulator:
     def __init__(self, cocktails: Dict, seed: int = None):
         self.cocktails = cocktails
@@ -67,7 +68,7 @@ class PartySimulator:
                 for _ in range(num_gluwein_orders):
                     drink = self.cocktails["Gluwein"]
                     
-                    if guest_total + drink.sell_price <= self.settings['max_guest_spend']:
+                    if isinstance(drink, Gluwein) and guest_total + drink.sell_price <= self.settings['max_guest_spend']:
                         drink_orders["Gluwein"] += 1
                         total_drinks_count += 1
                         guest_total += drink.sell_price

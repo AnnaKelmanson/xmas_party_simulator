@@ -1,0 +1,44 @@
+{
+    "alcohols": {
+        "Rom": {"type": "Alcohol", "price": 20, "volume": 1000},
+        "Gin": {"type": "Alcohol", "price": 23, "volume": 1000},
+        "Vodka": {"type": "Alcohol", "price": 15, "volume": 1000},
+        "Whiskey": {"type": "Alcohol", "price": 25, "volume": 1000},
+        "Angostura": {"type": "Alcohol", "price": 20, "volume": 200},
+        "Amaretto": {"type": "Alcohol", "price": 25, "volume": 700},
+        "Gluwein": {"type": "Alcohol", "price": 3, "volume": 1000},
+        "Secco": {"type": "Alcohol", "price": 10, "volume": 750}
+    },
+    "solvents": {
+        "Tonic": {"type": "Lemonade", "price": 10, "volume": 1000},
+        "Ginger Beer": {"type": "Lemonade", "price": 10, "volume": 1000},
+        "Soda": {"type": "Lemonade", "price": 10, "volume": 1000},
+        "Egg White": {"type": "Liquid", "price": 10, "volume": 1000},
+        "Redbull": {"type": "Lemonade", "price": 0.55, "volume": 250}
+    },
+    "syrups": {
+        "mandarin syrup": {"type": "Syrup", "price": 15, "volume": 1000},
+        "bergamot syrup": {"type": "Syrup", "price": 15, "volume": 1000},
+        "raspberry syrup": {"type": "Syrup", "price": 15, "volume": 1000},
+        "elderflower syrup": {"type": "Syrup", "price": 15, "volume": 1000},
+        "mohito syrup": {"type": "Syrup", "price": 15, "volume": 1000}
+    },
+    "lemons": {
+        "Lemon": {"type": "Lemon", "price": 6, "volume": 1000}
+    },
+    "juices": {
+        "Orange Juice": {"type": "Juice", "price": 5, "volume": 1000},
+        "Grapefruit Juice": {"type": "Juice", "price": 5, "volume": 1000},
+        "Cranberry Juice": {"type": "Juice", "price": 5, "volume": 1000}
+    },
+    "garnishes": {
+        "Ice": {"type": "Ice", "price": 10, "weight": 5000},
+        "Mint": {"type": "Garnish", "price": 2, "weight": 20},
+        "Basil": {"type": "Garnish", "price": 2, "weight": 20},
+        "Rosemary": {"type": "Garnish", "price": 2, "weight": 20},
+        "Orange": {"type": "Garnish", "price": 4, "weight": 1000},
+        "Star Anise": {"type": "Garnish", "price": 2, "weight": 20},
+        "Cinnamon": {"type": "Garnish", "price": 2, "weight": 20},
+        "Lime": {"type": "Garnish", "price": 4, "weight": 400}
+    }
+} 

@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Tuple, Union
 from .ingredients import LiquidIngredient, SolidIngredient
+from config.settings import PARTY_SETTINGS
 
 @dataclass
 class BaseDrink:
@@ -36,17 +37,17 @@ class BaseDrink:
 
 @dataclass
 class Cocktail(BaseDrink):
-    sell_price: float = 5.0
+    sell_price: float = PARTY_SETTINGS['cocktail_price']
 
 @dataclass
 class Shot(BaseDrink):
-    sell_price: float = 2.5
+    sell_price: float = PARTY_SETTINGS['shot_price']
 
 @dataclass
 class Gluwein:
     name: str
     alcohol: Tuple[LiquidIngredient, float]
-    sell_price: float = 2.5
+    sell_price: float = PARTY_SETTINGS['gluwein_price']
 
     def __post_init__(self):
         self.real_price = round(self.alcohol[0].price_per_ml * self.alcohol[1], 2) 
