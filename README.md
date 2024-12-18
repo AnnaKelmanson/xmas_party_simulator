@@ -43,18 +43,6 @@ The simulator assumes that each guest:
 - Could drink 2-3 Glühweins if they're feeling festive
 - Won't spend more than 20 CHF
 
-
-## 🎨 Project Structure
-
-```plaintext
-xmas_party_simulator/
-├── data/               # All our drinks and ingredients
-├── models/            # The boring but necessary stuff
-├── simulation/        # The magic happens here
-└── main.py           # Press play!
-```
-
-
 ## 🎅 Happy Holidays!
 
 Hope this helps make your party planning a bit easier. Cheers! 🥂
