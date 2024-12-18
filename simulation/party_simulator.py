@@ -3,23 +3,19 @@ from collections import defaultdict
 from typing import Dict, Tuple, DefaultDict
 from models.drinks import Cocktail, Shot, Gluwein
 from models.ingredients import SolidIngredient
+from config.settings import PARTY_SETTINGS
 
 class PartySimulator:
     def __init__(self, cocktails: Dict, seed: int = None):
         self.cocktails = cocktails
         if seed is not None:
             random.seed(seed)
+        self.settings = PARTY_SETTINGS
 
-        # Define simulation parameters
-        self.cocktail_mean = 2  # Average number of cocktails per person
-        self.cocktail_std = 1   # Standard deviation for cocktails
-        self.shot_mean = 1.5    # Average number of shots per person
-        self.shot_std = 1       # Standard deviation for shots
-        self.gluwein_mean = 2   # Average number of gluwein per person
-        self.gluwein_std = 1    # Standard deviation for gluwein
-        self.max_guest_spend = 20  # Maximum amount a guest can spend
-
-    def simulate(self, num_guests: int = 55) -> Tuple[DefaultDict, DefaultDict, int, float, float]:
+    def simulate(self, num_guests: int = None) -> Tuple[DefaultDict, DefaultDict, int, float, float]:
+        # Use settings value if num_guests not provided
+        if num_guests is None:
+            num_guests = self.settings['num_guests']
         drink_orders = defaultdict(int)
         ingredient_usage = defaultdict(float)
         total_drinks_count = 0
@@ -30,7 +26,7 @@ class PartySimulator:
             guest_total = 0
             
             # Simulate cocktail orders
-            num_cocktail_orders = max(0, round(random.gauss(self.cocktail_mean, self.cocktail_std)))
+            num_cocktail_orders = max(0, round(random.gauss(self.settings['cocktail_mean'], self.settings['cocktail_std'])))
             for _ in range(num_cocktail_orders):
                 available_cocktails = [name for name, drink in self.cocktails.items() 
                                      if isinstance(drink, Cocktail)]
@@ -40,7 +36,7 @@ class PartySimulator:
                 drink_name = random.choice(available_cocktails)
                 drink = self.cocktails[drink_name]
                 
-                if guest_total + drink.sell_price <= self.max_guest_spend:
+                if guest_total + drink.sell_price <= self.settings['max_guest_spend']:
                     self._process_order(drink, drink_name, drink_orders, ingredient_usage)
                     total_drinks_count += 1
                     guest_total += drink.sell_price
@@ -48,7 +44,7 @@ class PartySimulator:
                     total_cost += drink.real_price
 
             # Simulate shot orders
-            num_shot_orders = max(0, round(random.gauss(self.shot_mean, self.shot_std)))
+            num_shot_orders = max(0, round(random.gauss(self.settings['shot_mean'], self.settings['shot_std'])))
             for _ in range(num_shot_orders):
                 available_shots = [name for name, drink in self.cocktails.items() 
                                  if isinstance(drink, Shot)]
@@ -58,7 +54,7 @@ class PartySimulator:
                 drink_name = random.choice(available_shots)
                 drink = self.cocktails[drink_name]
                 
-                if guest_total + drink.sell_price <= self.max_guest_spend:
+                if guest_total + drink.sell_price <= self.settings['max_guest_spend']:
                     self._process_order(drink, drink_name, drink_orders, ingredient_usage)
                     total_drinks_count += 1
                     guest_total += drink.sell_price
@@ -67,11 +63,11 @@ class PartySimulator:
 
             # Simulate Gluwein orders
             if "Gluwein" in self.cocktails:
-                num_gluwein_orders = max(0, round(random.gauss(self.gluwein_mean, self.gluwein_std)))
+                num_gluwein_orders = max(0, round(random.gauss(self.settings['gluwein_mean'], self.settings['gluwein_std'])))
                 for _ in range(num_gluwein_orders):
                     drink = self.cocktails["Gluwein"]
                     
-                    if guest_total + drink.sell_price <= self.max_guest_spend:
+                    if guest_total + drink.sell_price <= self.settings['max_guest_spend']:
                         drink_orders["Gluwein"] += 1
                         total_drinks_count += 1
                         guest_total += drink.sell_price
